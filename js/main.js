@@ -471,28 +471,41 @@ var storageName  = "divisium-4/game-level";
 var level = 0;
 function parseOptions() {
     let URL_option_string = window.location.href.split("?")[1];
+
+    /* Convert URL special characters */
+    URL_option_string = URL_option_string.replace("%24",'$').replace("%23",'#');
+
     if (URL_option_string != undefined) {
         var URL_options = URL_option_string.split("&");
 
         /* Go through options */
         for (let i = 0; i < URL_options.length; i++) {
             /* Level option */
-            if (URL_options[i].match("L[0-9]*$") != null) {
+            if (URL_options[i].match(/L[0-9]*$/) != null) {
                 level_option = URL_options[i].split("L")[1];
             }
 
             /* Challenge set option */
-            if (URL_options[i].match("S[0-9]*$") != null) {
+            if (URL_options[i].match(/S[0-9]*$/) != null) {
                 set_option = URL_options[i].split("S")[1];
             }
 
-            if (URL_options[i].match("#.*$") != null) {
+            if (URL_options[i].match(/#.*$/) != null) {
                 level_option = 1;
                 set_option   = "#";
                 manualChallenges.push({info: URL_options[i]});
+
+                /* Remove hash sign from URL */
+                window.history.pushState({}, null, window.location.href.replace('#', '$'));
+            }
+
+            if (URL_options[i].match(/\$.*$/) != null) {
+                level_option = 1;
+                set_option   = "#";
+
+                manualChallenges.push({info: URL_options[i].replace('$', '#')});
             }
         }
-//        window.history.pushState({}, null, window.location.href.split("?")[0]);
     }
 
     /* Option fallbacks */
