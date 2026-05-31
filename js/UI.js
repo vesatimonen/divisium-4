@@ -1,9 +1,3 @@
-/*****************************************************************************
- * UI elements
- *****************************************************************************/
-const gameScreen = document.getElementById("game-screen");
-const gameBoard = document.getElementById("game-board");
-const gameGrid  = document.getElementById("game-grid");
 
 /*****************************************************************************
  * Board size variables
@@ -15,15 +9,15 @@ var gameGridCellSize;
  *****************************************************************************/
 function uiButtonsRedraw(game) {
     if (game.moveHistory.length == 0) {
-        buttonUndo.disabled = true;
+        elements.buttonUndo.disabled = true;
     } else {
-        buttonUndo.disabled = false;
+        elements.buttonUndo.disabled = false;
     }
 
     if (game.level == 0 && game.moveHistory.length == 0) {
-        buttonRestart.disabled = true;
+        elements.buttonRestart.disabled = true;
     } else {
-        buttonRestart.disabled = false;
+        elements.buttonRestart.disabled = false;
     }
 }
 
@@ -61,8 +55,8 @@ function uiElementsRedraw(board) {
 
     /* Set canvas size and clear it */
     const pixelRation = 2.0;
-    canvas.width = gameGrid.clientWidth * pixelRation;
-    canvas.height = gameGrid.clientHeight * pixelRation;
+    canvas.width = elements.grid.clientWidth * pixelRation;
+    canvas.height = elements.grid.clientHeight * pixelRation;
     context.scale(pixelRation, pixelRation);
     context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -132,23 +126,23 @@ function uiBoardRedraw(board) {
 function uiBoardSetup(board) {
 
     /* Calculate board grid size */
-    gameGridCellSize = Math.floor((gameScreen.clientWidth) / 9); /* 9 = Maximum board X-size */
+    gameGridCellSize = Math.floor((elements.screen.clientWidth) / 9); /* 9 = Maximum board X-size */
 
     /* Clear elements in board */
-    while (gameGrid.firstChild) {
-        gameGrid.removeChild(gameGrid.firstChild);
+    while (elements.grid.firstChild) {
+        elements.grid.removeChild(elements.grid.firstChild);
     }
 
     /* Center the board */
-    gameBoard.style.width = gameGridCellSize * board.width + "px";
-    gameBoard.style.left  = Math.floor((gameGridCellSize * (9 - board.width)) / 2) + "px";
+    elements.board.style.width = gameGridCellSize * board.width + "px";
+    elements.board.style.left  = Math.floor((gameGridCellSize * (9 - board.width)) / 2) + "px";
 
     /* Create grid and add cells */
     for (y = 0; y < board.height; y++) {
         /* Create row */
         let newRow = document.createElement("div");
         newRow.className = "grid-row";
-        gameGrid.appendChild(newRow);
+        elements.grid.appendChild(newRow);
 
         for (x = 0; x < board.width; x++) {
             /* Create cell */
@@ -179,7 +173,7 @@ function uiGridAnimationEnd(event) {
     if (game.level + 1 >= gameChallenges.length) {
         /* Show game over modal */
         gameOverModal.style.visibility = "visible";
-        gameBoard.style.visibility = "hidden";
+        elements.board.style.visibility = "hidden";
     }
 
     gameStart(game.level + 1); /* Start new level */
@@ -193,10 +187,10 @@ function uiGameRefresh(game) {
     /* Check if end of level */
     if (game.board.solved()) {
         /* Start animation */
-        gameBoard.addEventListener("animationend", uiGridAnimationEnd);
-        gameBoard.style.animation = "none";
-        gameBoard.offsetHeight; /* trigger reflow */
-        gameBoard.style.animation = "image-appear 0.5s ease-in 0.2s 1 reverse";
+        elements.board.addEventListener("animationend", uiGridAnimationEnd);
+        elements.board.style.animation = "none";
+        elements.board.offsetHeight; /* trigger reflow */
+        elements.board.style.animation = "image-appear 0.5s ease-in 0.2s 1 reverse";
     }
 }
 

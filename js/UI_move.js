@@ -14,7 +14,7 @@ function uiMovePosition(event) {
             return undefined;
     }
 
-    let rect = gameGrid.getBoundingClientRect();
+    let rect = elements.grid.getBoundingClientRect();
     X -= rect.left;
     Y -= rect.top;
     X = X / gameGridCellSize;
@@ -69,7 +69,7 @@ function uiClick(event) {
     }
 }
 
-gameBoard.addEventListener("click", uiClick, {passive: true});
+elements.board.addEventListener("click", uiClick, {passive: true});
 
 
 
