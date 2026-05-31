@@ -1,6 +1,3 @@
-const buttonRestart  = document.getElementById("button-restart");
-const buttonUndo     = document.getElementById("button-undo");
-
 
 /*****************************************************************************
  * Button handlers
@@ -56,20 +53,20 @@ function uiMouseDown(event) {
  * Register button event handlers
  *****************************************************************************/
 /* UNDO */
-buttonUndo.addEventListener("click", uiUndo);
+elements.buttonUndo.addEventListener("click", uiUndo);
 
 /* RESTART */
-buttonRestart.addEventListener("click",      uiRestart);
-buttonRestart.addEventListener("mouseup",    uiMouseUp);
-buttonRestart.addEventListener("mouseleave", uiMouseUp);
-buttonRestart.addEventListener("mousedown",  uiMouseDown);
-buttonRestart.addEventListener("touchend",   uiMouseUp);
-buttonRestart.addEventListener("touchstart", uiMouseDown, {passive: true});
+elements.buttonRestart.addEventListener("click",      uiRestart);
+elements.buttonRestart.addEventListener("mouseup",    uiMouseUp);
+elements.buttonRestart.addEventListener("mouseleave", uiMouseUp);
+elements.buttonRestart.addEventListener("mousedown",  uiMouseDown);
+elements.buttonRestart.addEventListener("touchend",   uiMouseUp);
+elements.buttonRestart.addEventListener("touchstart", uiMouseDown, {passive: true});
 
 function preventZoom(event) {
     /* Disable double click zoom */
     event.preventDefault();
 }
 
-document.getElementById("game-screen").addEventListener("click", preventZoom);
+elements.screen.document.addEventListener("click", preventZoom);
 
