@@ -253,10 +253,10 @@ class Game {
 
         switch (direction) {
             case "vertical":
-                polarity = game.board.toggleVerticalWall(x, y);
+                polarity = this.board.toggleVerticalWall(x, y);
                 break;
             case "horizontal":
-                polarity = game.board.toggleHorizontalWall(x, y);
+                polarity = this.board.toggleHorizontalWall(x, y);
                 break;
             default:
                 return undefined;
@@ -279,10 +279,10 @@ class Game {
 
         switch (move.direction) {
             case "vertical":
-                game.board.toggleVerticalWall(move.x, move.y);
+                this.board.toggleVerticalWall(move.x, move.y);
                 break;
             case "horizontal":
-                game.board.toggleHorizontalWall(move.x, move.y);
+                this.board.toggleHorizontalWall(move.x, move.y);
                 break;
             default:
                 return;
