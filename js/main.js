@@ -1,5 +1,3 @@
-var gameOverModal = document.getElementById("game-over-modal");
-
 
 /*****************************************************************************
  * Game levels
@@ -4395,14 +4393,14 @@ function parseOptions() {
 function modalClick(event) {
     event.preventDefault();
 
-    gameOverModal.style.visibility = "hidden";
-    gameBoard.style.visibility     = "visible";
+    elements.gameOver.style.visibility = "hidden";
+    elements.board.style.visibility     = "visible";
 
     gameStart(game.level);
 }
 
-gameOverModal.addEventListener("click",      modalClick);
-gameOverModal.addEventListener("touchend",   modalClick, {passive: true});
+elements.gameOver.addEventListener("click",      modalClick);
+elements.gameOver.addEventListener("touchend",   modalClick, {passive: true});
 
 
 /*****************************************************************************

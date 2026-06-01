@@ -13,10 +13,10 @@
 /*****************************************************************************
  * URL options
  *****************************************************************************/
-//var options = {
-//    challenges: [],
-//    level:      0
-//};
+var options = {
+    challenges: [],
+    level:      0
+};
 
 /*****************************************************************************
  * UI elements
@@ -28,7 +28,7 @@ const elements = {
 
 
 //    canvas:         document.getElementById('game-canvas'),
-//    gameOver:       document.getElementById("game-over-modal"),
+    gameOver:       document.getElementById("game-over-modal"),
 //
 //    title:          document.getElementById("game-title"),
 //    wordStatus:     document.getElementById("word-status"),
