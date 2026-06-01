@@ -4,12 +4,12 @@
  *****************************************************************************/
 function uiUndo(event) {
     /* Make undo if possible */
-    if (game.undoMove() == false) {
+    if (globals.game.undoMove() == false) {
         return false;
     }
 
     /* Refresh board */
-    uiGameRefresh(game);
+    uiGameRefresh(globals.game);
 
     return false;
 }
@@ -17,13 +17,13 @@ function uiUndo(event) {
 function uiRestart(event) {
     /* Undo all moves back */
     while (true) {
-        if (game.undoMove() == false) {
+        if (globals.game.undoMove() == false) {
             break;
         }
     }
 
     /* Setup board and refresh UI */
-    uiBoardSetup(game.board);
+    uiBoardSetup(globals.game.board);
 
     return false;
 }
@@ -37,10 +37,10 @@ function uiMouseUp(event) {
 function uiMouseDown(event) {
     restartTimer = setInterval(
                         function() {
-                            if (game.level == 0) {
+                            if (globals.game.level == 0) {
                                 clearInterval(restartTimer);
                             } else {
-                                gameStart(game.level - 1);
+                                gameStart(globals.game.level - 1);
                             }
                         },
                         500);

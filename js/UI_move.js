@@ -42,8 +42,8 @@ function uiClick(event) {
     Ycell = Math.floor(Y);
 
     /* Check limits */
-    if (Ycell < 0 || Ycell >= game.board.height ||
-        Xcell < 0 || Xcell >= game.board.width) {
+    if (Ycell < 0 || Ycell >= globals.game.board.height ||
+        Xcell < 0 || Xcell >= globals.game.board.width) {
         return false;
     }
 
@@ -53,17 +53,17 @@ function uiClick(event) {
     if (Xdelta < Ydelta) {
         if (Ydelta - Xdelta > 0.0) {
             /* Vertical wall */
-            if (Xwall > 0 && Xwall < game.board.width) {
-                game.makeMove("vertical", Xwall, Ycell);
-                uiGameRefresh(game);
+            if (Xwall > 0 && Xwall < globals.game.board.width) {
+                globals.game.makeMove("vertical", Xwall, Ycell);
+                uiGameRefresh(globals.game);
             }
         }
     } else {
         if (Xdelta - Ydelta > 0.0) {
             /* Horizontal wall */
-            if (Ywall > 0 && Ywall < game.board.height) {
-                game.makeMove("horizontal", Xcell, Ywall);
-                uiGameRefresh(game);
+            if (Ywall > 0 && Ywall < globals.game.board.height) {
+                globals.game.makeMove("horizontal", Xcell, Ywall);
+                uiGameRefresh(globals.game);
             }
         }
     }

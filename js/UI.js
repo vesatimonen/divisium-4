@@ -113,10 +113,10 @@ function uiBoardRedraw(board) {
     uiElementsRedraw(board);
 
     /* Redraw info */
-    uiInfoRedraw(game);
+    uiInfoRedraw(globals.game);
 
     /* Redraw buttons */
-    uiButtonsRedraw(game);
+    uiButtonsRedraw(globals.game);
 }
 
 
@@ -170,22 +170,22 @@ function uiBoardSetup(board) {
 function uiGridAnimationEnd(event) {
     event.stopPropagation();
 
-    if (game.level + 1 >= gameChallenges.length) {
+    if (globals.game.level + 1 >= gameChallenges.length) {
         /* Show game over modal */
         gameOverModal.style.visibility = "visible";
         elements.board.style.visibility = "hidden";
     }
 
-    gameStart(game.level + 1); /* Start new level */
+    gameStart(globals.game.level + 1); /* Start new level */
     return false;
 }
 
 function uiGameRefresh(game) {
     /* Redraw game board */
-    uiBoardRedraw(game.board);
+    uiBoardRedraw(globals.game.board);
 
     /* Check if end of level */
-    if (game.board.solved()) {
+    if (globals.game.board.solved()) {
         /* Start animation */
         elements.board.addEventListener("animationend", uiGridAnimationEnd);
         elements.board.style.animation = "none";

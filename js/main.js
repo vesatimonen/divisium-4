@@ -4396,7 +4396,7 @@ function modalClick(event) {
     elements.gameOver.style.visibility = "hidden";
     elements.board.style.visibility     = "visible";
 
-    gameStart(game.level);
+    gameStart(globals.game.level);
 }
 
 elements.gameOver.addEventListener("click",      modalClick);
@@ -4417,27 +4417,27 @@ function gameStart(level) {
     }
 
     /* Use predefined challenges */
-    game.init(level, gameChallenges[level].info);
+    globals.game.init(level, gameChallenges[level].info);
     if (gameChallenges == debugChallengeSet) {
         document.getElementById("debug-text").innerHTML = gameChallenges[level].info.split("#")[0];
     }
 
 
     /* Save game point */
-    localStorage.setItem(storageName, JSON.stringify(game.level));
+    localStorage.setItem(storageName, JSON.stringify(globals.game.level));
 
     /* Setup board */
-    uiBoardSetup(game.board);
+    uiBoardSetup(globals.game.board);
 }
 
 
-var game = undefined;
+
 window.onload = function () {
     /* Parse options */
     parseOptions();
 
     /* Start game */
-    game = new Game();
+    globals.game = new Game();
     gameStart(level);
 
     /* Show window */
