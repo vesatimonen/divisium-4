@@ -4419,7 +4419,7 @@ function gameStart(level) {
     /* Use predefined challenges */
     globals.game.init(level, gameChallenges[level].info);
     if (gameChallenges == debugChallengeSet) {
-        document.getElementById("debug-text").innerHTML = gameChallenges[level].info.split("#")[0];
+        elements.debug.innerHTML = gameChallenges[level].info.split("#")[0];
     }
 
 
@@ -4441,7 +4441,7 @@ window.onload = function () {
     gameStart(level);
 
     /* Show window */
-    document.getElementById("game-screen").style.visibility = "visible";
+    elements.screen.style.visibility = "visible";
 }
 
 

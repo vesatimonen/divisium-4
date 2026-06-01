@@ -50,15 +50,14 @@ function uiCellRedraw(board, x, y) {
 
 
 function uiElementsRedraw(board) {
-    var canvas = document.getElementById('game-canvas');
-    var context = canvas.getContext('2d');
+    var context = elements.canvas.getContext('2d');
 
     /* Set canvas size and clear it */
     const pixelRation = 2.0;
-    canvas.width = elements.grid.clientWidth * pixelRation;
-    canvas.height = elements.grid.clientHeight * pixelRation;
+    elements.canvas.width = elements.grid.clientWidth * pixelRation;
+    elements.canvas.height = elements.grid.clientHeight * pixelRation;
     context.scale(pixelRation, pixelRation);
-    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.clearRect(0, 0, elements.canvas.width, elements.canvas.height);
 
     /* Draw dots */
     var dotRadius = 3;

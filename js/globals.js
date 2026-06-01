@@ -26,19 +26,12 @@ const elements = {
     board:          document.getElementById("game-board"),
     grid:           document.getElementById("game-grid"),
 
-
-//    canvas:         document.getElementById('game-canvas'),
+    canvas:         document.getElementById('game-canvas'),
     gameOver:       document.getElementById("game-over-modal"),
-//
-//    title:          document.getElementById("game-title"),
-//    wordStatus:     document.getElementById("word-status"),
-//    instructions:   document.getElementById("game-instructions"),
-//
     buttonRestart:  document.getElementById("button-restart"),
     buttonUndo:     document.getElementById("button-undo"),
-//
-//    debug:          document.getElementById("debug-text")
-//
+
+    debug:          document.getElementById("debug-text")
 };
 
 
