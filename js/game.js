@@ -230,7 +230,7 @@ class Game {
         this.board = new Board();
 
         /* Game move history */
-        this.moveHistory = [];
+        this.moves = [];
 
         /* Game level */
         this.level = 0;
@@ -238,7 +238,7 @@ class Game {
 
     init(level, info) {
         /* Clear move history */
-        this.moveHistory = [];
+        this.moves = [];
 
         /* Set level */
         this.level = level;
@@ -263,19 +263,19 @@ class Game {
         }
 
         /* Save move */
-        this.moveHistory.push({direction: direction, x: x, y: y});
+        this.moves.push({direction: direction, x: x, y: y});
 
         return polarity;
     }
 
     undoMove() {
         /* Check if something to undo */
-        if (this.moveHistory.length == 0) {
+        if (this.moves.length == 0) {
             return false;
         }
 
         /* Pop latest move */
-        let move = this.moveHistory.pop();
+        let move = this.moves.pop();
 
         switch (move.direction) {
             case "vertical":
@@ -292,7 +292,7 @@ class Game {
     }
 
     undoable() {
-        if (this.moveHistory.length == 0) {
+        if (this.moves.length == 0) {
             return false;
         }
         return true;
