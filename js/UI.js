@@ -117,7 +117,7 @@ function uiBoardRedraw(board) {
 function uiBoardSetup(board) {
 
     /* Calculate board grid size */
-    globals.cellSize = Math.floor((elements.screen.clientWidth) / 9); /* 9 = Maximum board X-size */
+    globals.cellSize = Math.floor((elements.screen.clientWidth) / globals.boardMaxSize); /* 9 = Maximum board X-size */
 
     /* Clear elements in board */
     while (elements.grid.firstChild) {
