@@ -17,8 +17,8 @@ function uiMovePosition(event) {
     let rect = elements.grid.getBoundingClientRect();
     X -= rect.left;
     Y -= rect.top;
-    X = X / gameGridCellSize;
-    Y = Y / gameGridCellSize;
+    X = X / globals.cellSize;
+    Y = Y / globals.cellSize;
 
     return {X, Y};
 }

@@ -1,8 +1,4 @@
 
-/*****************************************************************************
- * Board size variables
- *****************************************************************************/
-var gameGridCellSize;
 
 /*****************************************************************************
  * Redraw buttons
@@ -64,7 +60,7 @@ function uiElementsRedraw(board) {
     for (y = 0; y <= board.height; y++) {
         for (x = 0; x <= board.width; x++) {
             context.beginPath();
-            context.arc(gameGridCellSize * x, gameGridCellSize * y, dotRadius, 0, 2 * Math.PI, false);
+            context.arc(globals.cellSize * x, globals.cellSize * y, dotRadius, 0, 2 * Math.PI, false);
             context.fillStyle = "#202020";
             context.fill();
         }
@@ -80,8 +76,8 @@ function uiElementsRedraw(board) {
     for (let x = 0; x < board.width + 1; x++) {
         for (let y = 0; y < board.height; y++) {
             if (board.getVerticalWall(x, y) > 0) {
-                context.moveTo(gameGridCellSize * x, gameGridCellSize * y);
-                context.lineTo(gameGridCellSize * x, gameGridCellSize * (y + 1));
+                context.moveTo(globals.cellSize * x, globals.cellSize * y);
+                context.lineTo(globals.cellSize * x, globals.cellSize * (y + 1));
             }
         }
     }
@@ -90,8 +86,8 @@ function uiElementsRedraw(board) {
     for (let y = 0; y < board.height + 1; y++) {
         for (let x = 0; x < board.width; x++) {
             if (board.getHorizontalWall(x, y) > 0) {
-                context.moveTo(gameGridCellSize * x, gameGridCellSize * y);
-                context.lineTo(gameGridCellSize * (x + 1), gameGridCellSize * y);
+                context.moveTo(globals.cellSize * x, globals.cellSize * y);
+                context.lineTo(globals.cellSize * (x + 1), globals.cellSize * y);
             }
         }
     }
@@ -125,7 +121,7 @@ function uiBoardRedraw(board) {
 function uiBoardSetup(board) {
 
     /* Calculate board grid size */
-    gameGridCellSize = Math.floor((elements.screen.clientWidth) / 9); /* 9 = Maximum board X-size */
+    globals.cellSize = Math.floor((elements.screen.clientWidth) / 9); /* 9 = Maximum board X-size */
 
     /* Clear elements in board */
     while (elements.grid.firstChild) {
@@ -133,8 +129,8 @@ function uiBoardSetup(board) {
     }
 
     /* Center the board */
-    elements.board.style.width = gameGridCellSize * board.width + "px";
-    elements.board.style.left  = Math.floor((gameGridCellSize * (9 - board.width)) / 2) + "px";
+    elements.board.style.width = globals.cellSize * board.width + "px";
+    elements.board.style.left  = Math.floor((globals.cellSize * (9 - board.width)) / 2) + "px";
 
     /* Create grid and add cells */
     for (y = 0; y < board.height; y++) {
@@ -149,9 +145,9 @@ function uiBoardSetup(board) {
             newCell.className    = "grid-cell";
             newCell.id           = "cell-" + x + "-" + y;
 
-            newCell.style.width      = gameGridCellSize + "px";
-            newCell.style.height     = gameGridCellSize + "px";
-            newCell.style.lineHeight = gameGridCellSize + "px"; /* Center text vertically */
+            newCell.style.width      = globals.cellSize + "px";
+            newCell.style.height     = globals.cellSize + "px";
+            newCell.style.lineHeight = globals.cellSize + "px"; /* Center text vertically */
             newCell.style.textAlign  = "center";
 
             newRow.appendChild(newCell);
