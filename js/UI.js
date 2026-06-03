@@ -4,16 +4,12 @@
  * Redraw buttons
  *****************************************************************************/
 function uiButtonsRedraw(game) {
-    if (game.moveHistory.length == 0) {
-        elements.buttonUndo.disabled = true;
-    } else {
-        elements.buttonUndo.disabled = false;
-    }
-
-    if (game.level == 0 && game.moveHistory.length == 0) {
-        elements.buttonRestart.disabled = true;
-    } else {
+    if (game.undoable()) {
+        elements.buttonUndo.disabled    = false;
         elements.buttonRestart.disabled = false;
+    } else {
+        elements.buttonUndo.disabled    = true;
+        elements.buttonRestart.disabled = true;
     }
 }
 

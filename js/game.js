@@ -290,6 +290,13 @@ class Game {
 
         return true;
     }
+
+    undoable() {
+        if (this.moveHistory.length == 0) {
+            return false;
+        }
+        return true;
+    }
 }
 
 
