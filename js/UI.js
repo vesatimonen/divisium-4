@@ -18,7 +18,7 @@ function uiButtonsRedraw(game) {
  *****************************************************************************/
 function uiInfoRedraw(game) {
     let gameInfo = document.getElementById("game-info");
-    gameInfo.innerHTML = "L" + (game.level + 1) + "/" + gameChallenges.length;
+    gameInfo.innerHTML = "L" + (game.level + 1) + "/" + options.challenges.length;
 }
 
 /*****************************************************************************
@@ -161,9 +161,9 @@ function uiBoardSetup(board) {
 function uiGridAnimationEnd(event) {
     event.stopPropagation();
 
-    if (globals.game.level + 1 >= gameChallenges.length) {
+    if (globals.game.level + 1 >= options.challenges.length) {
         /* Show game over modal */
-        gameOverModal.style.visibility = "visible";
+        elements.gameOver.style.visibility = "visible";
         elements.board.style.visibility = "hidden";
     }
 

@@ -4313,7 +4313,6 @@ var debugChallengeSet = [
     {info: "INFO: V33-24-15-09 C06-38-84 D3003222000001000000000000000 T000018 #9x9=3-321030120001201210010121122302002011021211002011111030012010000310001330030032021"},
 ];
 
-var gameChallenges = debugChallengeSet;
 
 /*****************************************************************************
  * Parse URL options
@@ -4385,20 +4384,20 @@ function gameStart(level) {
     if (level == undefined || level < 0) {
         level = 0;
     }
-    if (level >= gameChallenges.length) {
-        level = gameChallenges.length - 1;
+    if (level >= options.challenges.length) {
+        level = options.challenges.length - 1;
     }
 
     /* Initialize game */
     document.getElementById("divisium-sum").innerHTML = "4";
-    globals.game.init(level, gameChallenges[level].info);
+    globals.game.init(level, options.challenges[level].info);
 
     /* Save game point */
     localStorage.setItem(globals.storage, JSON.stringify(globals.game.level));
 
     /* Debug text */
-    if (gameChallenges == debugChallengeSet) {
-        elements.debug.innerHTML = gameChallenges[level].info.split("#")[0];
+    if (options.challenges == debugChallengeSet) {
+        elements.debug.innerHTML = options.challenges[level].info.split("#")[0];
     }
 
     /* Setup board */
@@ -4408,6 +4407,7 @@ function gameStart(level) {
 
 
 window.onload = function () {
+    options.challenges = debugChallengeSet;
     globals.storage = "divisium-4/game-level";
 
     /* Parse options */
