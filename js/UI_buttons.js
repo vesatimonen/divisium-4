@@ -9,7 +9,7 @@ function uiUndo(event) {
     }
 
     /* Refresh board */
-    uiGameRefresh(globals.game);
+    uiRedraw();
 
     return false;
 }

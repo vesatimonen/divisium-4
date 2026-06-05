@@ -55,7 +55,7 @@ function uiClick(event) {
             /* Vertical wall */
             if (Xwall > 0 && Xwall < globals.game.board.width) {
                 globals.game.makeMove("vertical", Xwall, Ycell);
-                uiGameRefresh(globals.game);
+                uiRedraw();
             }
         }
     } else {
@@ -63,7 +63,7 @@ function uiClick(event) {
             /* Horizontal wall */
             if (Ywall > 0 && Ywall < globals.game.board.height) {
                 globals.game.makeMove("horizontal", Xcell, Ywall);
-                uiGameRefresh(globals.game);
+                uiRedraw();
             }
         }
     }

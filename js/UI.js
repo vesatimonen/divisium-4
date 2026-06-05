@@ -171,7 +171,11 @@ function uiGridAnimationEnd(event) {
     return false;
 }
 
-function uiGameRefresh(game) {
+
+/*****************************************************************************
+ * Redraw UI
+ *****************************************************************************/
+function uiRedraw() {
     /* Redraw game board */
     uiBoardRedraw(globals.game.board);
 
@@ -184,7 +188,6 @@ function uiGameRefresh(game) {
         elements.board.style.animation = "image-appear 0.5s ease-in 0.2s 1 reverse";
     }
 }
-
 
 
 
