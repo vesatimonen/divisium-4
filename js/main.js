@@ -4417,11 +4417,11 @@ function gameStart(level) {
     }
 
     /* Use predefined challenges */
+    document.getElementById("divisium-sum").innerHTML = "4";
     globals.game.init(level, gameChallenges[level].info);
     if (gameChallenges == debugChallengeSet) {
         elements.debug.innerHTML = gameChallenges[level].info.split("#")[0];
     }
-
 
     /* Save game point */
     localStorage.setItem(storageName, JSON.stringify(globals.game.level));
