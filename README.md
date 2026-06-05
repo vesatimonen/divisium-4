@@ -1,6 +1,6 @@
-# DIVISIUM-4
+# DIVISIUM
 
-DIVISIUM-4 is a tiny multi-challenge puzzle made with HTML, CSS and native JavaScript.
+DIVISIUM is a multi-challenge puzzle made with HTML, CSS and native JavaScript.
 
 <img src="images/capture.png" alt="Game example" />
 
