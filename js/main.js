@@ -1,4 +1,3 @@
-var storageName  = "divisium-4/game-level";
 
 /*****************************************************************************
  * Game levels
@@ -4314,73 +4313,51 @@ var debugChallengeSet = [
     {info: "INFO: V33-24-15-09 C06-38-84 D3003222000001000000000000000 T000018 #9x9=3-321030120001201210010121122302002011021211002011111030012010000310001330030032021"},
 ];
 
-var gameChallenges = defaultChallengeSet;
-var manualChallenges = [];
+var gameChallenges = debugChallengeSet;
 
 /*****************************************************************************
  * Parse URL options
  *****************************************************************************/
 var level_option = undefined;
 var set_option   = undefined;
-var level = 0;
 function parseOptions() {
-    let URL_option_string = window.location.href.split("?")[1];
-    if (URL_option_string != undefined) {
-        /* Convert URL special characters */
-        URL_option_string = URL_option_string.replace("%24",'$').replace("%23",'#');
+    /* Replace special characters in url */
+    var newUrl = window.location.href;
+    newUrl = newUrl.replace("%23", '#'); /* Replace "%23" -> '#' */
+    newUrl = newUrl.replace('#', '>');   /* '#' -> '>' */
+    newUrl = newUrl.replace("%3E", '>'); /* Replace "%3E" -> '>' */
 
-        var URL_options = URL_option_string.split("&");
+    /* Create URL */
+    const url = new URL(newUrl);
 
-        /* Go through options */
-        for (let i = 0; i < URL_options.length; i++) {
-            /* Level option */
-            if (URL_options[i].match(/L[0-9]*$/) != null) {
-                level_option = URL_options[i].split("L")[1];
-            }
-
-            /* Challenge set option */
-            if (URL_options[i].match(/S[0-9]*$/) != null) {
-                set_option = URL_options[i].split("S")[1];
-            }
-
-            if (URL_options[i].match(/#.*$/) != null) {
-                level_option = 1;
-                set_option   = "#";
-                manualChallenges.push({info: URL_options[i]});
-
-                /* Remove hash sign from URL */
-                window.history.pushState({}, null, window.location.href.replace('#', '$'));
-            }
-
-            if (URL_options[i].match(/\$.*$/) != null) {
-                level_option = 1;
-                set_option   = "#";
-
-                manualChallenges.push({info: URL_options[i].replace('$', '#')});
-            }
-        }
-    }
-
-    /* Option fallbacks */
-    if (set_option == undefined || set_option == 0) {
-        gameChallenges = defaultChallengeSet;
-    } else {
-        if (set_option == "#") {
-            gameChallenges = manualChallenges;
-            storageName    = storageName + "-#";
-        } else {
-            gameChallenges = debugChallengeSet;
-            storageName    = storageName + "-S" + set_option;
-        }
-    }
-
-    if (level_option == undefined) {
+    /* Level option */
+    const levelOption = url.searchParams.get("level");
+    if (levelOption == null) {
         /* Read from storage */
-        level = JSON.parse(localStorage.getItem(storageName));
+        options.level = JSON.parse(localStorage.getItem(globals.storage));
     } else {
-        level = Number(level_option) - 1;
+        options.level = Number(levelOption - 1);
     }
 
+    /* Challenge option */
+    var challengeOption = url.searchParams.getAll("challenge");
+    if (challengeOption.length == 0) {
+    } else {
+        if (challengeOption.length > 0) {
+            options.challenges = [];
+            for (let index = 0; index < challengeOption.length; index++) {
+                /* Convert URL special characters */
+                challengeOption[index] = challengeOption[index].replace("%3E",'>');
+
+                /* Insert it to manual challenges table */
+                options.challenges.push({info: challengeOption[index]});
+            }
+
+            /* Set manual challenges to be played */
+            globals.storage = globals.storage + "-manual";
+            options.level   = 0;
+        }
+    }
 }
 
 
@@ -4408,20 +4385,21 @@ function gameStart(level) {
     if (level == undefined || level < 0) {
         level = 0;
     }
-
     if (level >= gameChallenges.length) {
         level = gameChallenges.length - 1;
     }
 
-    /* Use predefined challenges */
+    /* Initialize game */
     document.getElementById("divisium-sum").innerHTML = "4";
     globals.game.init(level, gameChallenges[level].info);
+
+    /* Save game point */
+    localStorage.setItem(globals.storage, JSON.stringify(globals.game.level));
+
+    /* Debug text */
     if (gameChallenges == debugChallengeSet) {
         elements.debug.innerHTML = gameChallenges[level].info.split("#")[0];
     }
-
-    /* Save game point */
-    localStorage.setItem(storageName, JSON.stringify(globals.game.level));
 
     /* Setup board */
     uiBoardSetup(globals.game.board);
@@ -4430,12 +4408,14 @@ function gameStart(level) {
 
 
 window.onload = function () {
+    globals.storage = "divisium-4/game-level";
+
     /* Parse options */
     parseOptions();
 
     /* Start game */
     globals.game = new Game();
-    gameStart(level);
+    gameStart(options.level);
 
     /* Show window */
     elements.screen.style.visibility = "visible";
