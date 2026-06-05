@@ -4,14 +4,10 @@
  *****************************************************************************/
 function uiUndo(event) {
     /* Make undo if possible */
-    if (globals.game.undoMove() == false) {
-        return false;
-    }
+    globals.game.undoMove()
 
     /* Refresh board */
     uiRedraw();
-
-    return false;
 }
 
 function uiRestart(event) {
@@ -22,8 +18,8 @@ function uiRestart(event) {
         }
     }
 
-    /* Setup board and refresh UI */
-    uiBoardSetup(globals.game.board);
+    /* Redraw UI */
+    uiRedraw();
 
     return false;
 }
