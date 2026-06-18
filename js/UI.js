@@ -29,7 +29,11 @@ function uiCellRedraw(board, x, y) {
     let cell = document.getElementById("cell-" + x + "-" + y);
 
     /* Set value on board */
-    cell.innerHTML = board.values[x][y];
+    if (board.values[x][y] != 0) {
+        cell.innerHTML = board.values[x][y];
+    } else {
+        cell.innerHTML = '';
+    }
 
     /* Set background */
     if (board.resolved(x, y)) {
